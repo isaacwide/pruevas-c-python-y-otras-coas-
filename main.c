@@ -36,3 +36,13 @@ __declspec(dllexport) int archivo_existe(char *filename){
          return 0;
    }
 }
+
+
+__declspect(dllexport) void multiplica_matriz(char *filename1 , char * filename2) {
+    FILE *file1 = fopen(filename1, "r");
+    FILE *file2 = fopen(filename2, "r");
+    if (file1 == NULL || file2 == NULL) {
+        printf("Error al abrir los archivos.\n");
+        return;
+    }
+}
