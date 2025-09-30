@@ -45,4 +45,6 @@ __declspect(dllexport) void multiplica_matriz(char *filename1 , char * filename2
         printf("Error al abrir los archivos.\n");
         return;
     }
+
+    int 
 }
