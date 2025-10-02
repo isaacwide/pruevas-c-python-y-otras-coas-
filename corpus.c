@@ -31,7 +31,7 @@ int es_delimitador(char *palabra) {
     }
     return 0;
 }
-
+ 
 void word_in_topic(char *filename1, char *filename2) {
     FILE *file1 = fopen(filename1, "r");
     FILE *file2 = fopen(filename2, "r");
