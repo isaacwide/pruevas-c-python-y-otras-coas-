@@ -9,7 +9,7 @@ A
 LEON
 WERTH
 CUANDO
-ser
+ERA
 NIÑO
 Leon
 Werth
@@ -51,7 +51,7 @@ uno
 serpiente
 boa
 que
-digerir
+digiere
 uno
 elefante
 Dibujé
@@ -84,17 +84,17 @@ número
 2
 ser
 así
-document2
+II
 Por
 favor
-píntamir
+píntamar
 uno
 cordero
 Eh
 Píntame
 uno
 cordero
-cuando
+Cuando
 logré
 por
 fin
@@ -119,14 +119,14 @@ mucho
 importante
 Por
 favor
-píntamir
+píntame
 uno
 cordero
 no
 importar
 yo
 responder
-píntamir
+píntamar
 uno
 cordero
 Dibujé
@@ -143,9 +143,9 @@ estar
 ya
 mucho
 enfermo
-haz
+Haz
 otro
-volver
+Volví
 a
 dibujar
 mi
@@ -175,7 +175,7 @@ igual
 que
 el
 anterior
-este
+Este
 ser
 demasiado
 viejo
@@ -198,7 +198,7 @@ a
 desmontar
 el
 motor
-garrapateé
+garrapateer
 rápidamente
 este
 dibujo
@@ -247,7 +247,7 @@ este
 cordero
 Por
 qué
-porque
+Porque
 en
 mi
 tierra
@@ -267,7 +267,7 @@ no
 tanto
 pequeño
 estar
-dormido
+dormir
 Y
 así
 ser
@@ -275,7 +275,7 @@ como
 conocí
 al
 principito
-DOCUMENT3
+III
 qué
 cosa
 ser
@@ -303,7 +303,7 @@ el
 entonces
 gritar
 cómo
-has
+Has
 caer
 del
 cielo
@@ -320,13 +320,13 @@ principito
 lanzar
 uno
 gracioso
-carcajada
+carcajado
 que
 yo
 irritar
 mucho
 yo
-gustar
+gusta
 que
 mi
 desgracia
@@ -347,7 +347,7 @@ qué
 planeta
 ser
 tú
-divisé
+Divisé
 uno
 luz
 en
@@ -360,13 +360,13 @@ y
 él
 preguntar
 bruscamente
-tu
+Tu
 vién
 pues
 de
 otro
 planeta
-pero
+Pero
 no
 yo
 responder
@@ -407,7 +407,7 @@ bolsillo
 mi
 cordero
 él
-abismar
+abismó
 en
 el
 contemplación
@@ -440,7 +440,7 @@ estar
 tu
 casa
 dónde
-quier
+quieres
 llevarte
 mi
 cordero
@@ -457,7 +457,7 @@ el
 caja
 que
 yo
-haber
+has
 dar
 ser
 que
@@ -481,7 +481,7 @@ uno
 cuerda
 y
 uno
-estaca
+estacar
 para
 atar él
 durante
@@ -498,6 +498,7 @@ qué
 idea
 más
 raro
+document2
 Si
 no
 él
@@ -515,10 +516,10 @@ amigo
 soltar
 uno
 nuevo
-carcajada
-Y
+carcajado
+y
 dónde
-querer
+quieres
 que
 ir
 no
@@ -526,7 +527,7 @@ saber
 a
 cualquiera
 parte
-derecho
+Derecho
 camino
 adelante
 entonces
@@ -559,7 +560,7 @@ poder
 ir
 mucho
 lejos
-document4
+IV
 De
 este
 manera
@@ -585,8 +586,8 @@ para
 el
 reputación
 del
-asteroide
-B
+asteroidir
+b
 612
 uno
 dictador
@@ -597,11 +598,11 @@ que
 saber
 comprender
 haber
-deber
+debido
 envejecer
 ser
 también
-gracias
+gracia
 al
 cordero
 y
@@ -622,7 +623,7 @@ que
 el
 cordero
 él
-comar
+comen
 el
 arbusto
 sí
@@ -654,7 +655,7 @@ principito
 añadir
 entonces
 él
-comar
+comen
 también
 el
 Baobabs
@@ -668,7 +669,7 @@ hacer
 reír
 al
 principito
-haber
+Habría
 que
 poner
 el
@@ -680,7 +681,7 @@ Y
 luego
 añadir
 juiciosamente
-él
+el
 baobabs
 antes
 de
@@ -693,14 +694,14 @@ cierto
 pero
 por
 qué
-querer
+quier
 que
 tu
 cordero
 comar
 el
 baobabs
-document6
+VI
 Ah
 principito
 cómo
@@ -714,7 +715,7 @@ yo
 gustar
 mucho
 el
-puesta
+puestas
 de
 sol
 ir
@@ -741,7 +742,7 @@ primero
 y
 después
 tú
-reíste
+reístar
 de
 tú
 mismo
@@ -779,10 +780,10 @@ estar
 verdaderamente
 triste
 él
-gustar
+gusta
 ver
 el
-puesta
+puestas
 de
 sol
 el
@@ -803,7 +804,7 @@ el
 principito
 no
 responder
-document7
+vii
 Si
 uno
 cordero
@@ -880,7 +881,7 @@ no
 tú
 creer
 el
-flor
+flores
 ser
 débil
 ser
@@ -904,7 +905,7 @@ no
 no
 creer
 nada
-tú
+te
 haber
 responder
 cualquiera
@@ -912,7 +913,7 @@ cosa
 para
 que
 tú
-callser
+calle
 tener
 que
 ocupar yo
@@ -922,7 +923,7 @@ serio
 yo
 mirar
 estupefacto
-de
+De
 cosa
 serio
 yo
@@ -961,7 +962,7 @@ pero
 implacable
 añadir
 él
-confundir
+confund
 todo
 todo
 él
@@ -985,7 +986,7 @@ hongo
 el
 principito
 estar
-pálido
+pálir
 de
 cólera
 el
@@ -1003,7 +1004,8 @@ estallar
 bruscamente
 en
 sollozo
-document8
+DOCUMENT3
+VIII
 belleza
 al
 abrigo
@@ -1024,7 +1026,7 @@ bostezar
 Ah
 perdóname
 apenas
-acabar
+acabo
 de
 despertar yo
 estar
@@ -1052,7 +1054,7 @@ añadir
 el
 flor
 si
-tuvierar
+tuviera
 el
 bondad
 de
@@ -1061,7 +1063,7 @@ uno
 poco
 en
 yo
-Y
+y
 el
 principito
 mucho
@@ -1072,7 +1074,7 @@ a
 buscar
 uno
 regadera
-él
+el
 rociar
 abundantemente
 con
@@ -1089,7 +1091,7 @@ su
 vanidad
 uno
 poco
-sombrir
+somber
 uno
 día
 por
@@ -1124,7 +1126,7 @@ además
 el
 tigre
 no
-comar
+comen
 hierba
 yo
 no
@@ -1150,7 +1152,7 @@ corriente
 de
 aire
 no
-tendrar
+tendrás
 uno
 biombo
 miedo
@@ -1202,15 +1204,15 @@ venir
 Y
 el
 biombo
-ir
+Iba
 a
 buscar él
 pero
 como
 no
-dejabas
+dejaba
 de
-hablar yo
+hablarme
 insistir
 en
 su
@@ -1237,7 +1239,7 @@ y
 yo
 contar
 todavía
-document9
+IX
 Adiós
 él
 decir
@@ -1258,11 +1260,11 @@ pero
 no
 porque
 estar
-resfriar
+resfriado
 haber
 ser
 uno
-tonta
+tonto
 él
 decir
 al
@@ -1270,7 +1272,7 @@ fin
 el
 flor
 Perdóname
-procurar
+Procura
 ser
 feliz
 él
@@ -1292,7 +1294,7 @@ aire
 no
 comprender
 este
-tranquila
+tranquilo
 mansedumbre
 Pero
 el
@@ -1329,14 +1331,14 @@ luego
 añadir
 Y
 no
-prolongar
+prolongu
 más
 tu
 despedida
 puesto
 que
-haber
-decidir
+has
+decidido
 partir
 vetir
 de
@@ -1348,7 +1350,7 @@ no
 querer
 que
 el
-viesar
+ver
 llorar
 ser
 tanto
@@ -1360,7 +1362,7 @@ el
 región
 de
 el
-asteroides
+asteroid
 325
 326
 327
@@ -1368,7 +1370,7 @@ asteroides
 329
 y
 330
-Para
+para
 ocupar él
 en
 algo
@@ -1382,19 +1384,19 @@ visitarlo
 el
 primero
 estar
-habitado
+habitar
 por
 uno
 rey
 el
 rey
-vestido
+vestir
 de
 púrpura
 y
 armiño
 estar
-sentado
+sentar
 sobre
 uno
 trono
@@ -1431,7 +1433,7 @@ nunca
 yo
 haber
 ver
-ignorar
+Ignoraba
 que
 para
 el
@@ -1461,10 +1463,10 @@ el
 monarca
 te
 él
-prohíbir
+prohíbo
 no
 haber
-poder
+podido
 evitar él
 responder
 el
@@ -1487,7 +1489,7 @@ decir
 el
 rey
 tú
-ordenar
+ordeno
 que
 bostez
 hacer
@@ -1505,12 +1507,13 @@ para
 yo
 algo
 curioso
-ir
+ver
 bosteza
 otro
 vez
 tú
 él
+document4
 ordeno
 yo
 dar
@@ -1529,8 +1532,8 @@ responder
 el
 rey
 Bueno
-tú
-ordenar
+te
+ordeno
 tanto
 pronto
 que
@@ -1546,7 +1549,7 @@ tímidamente
 el
 principito
 tú
-ordenar
+ordeno
 sentarte
 él
 responder
@@ -1564,7 +1567,7 @@ armiño
 el
 principito
 estar
-sorprendido
+sorprender
 aquel
 planeta
 ser
@@ -1580,15 +1583,15 @@ poder
 reinar
 aquel
 rey
-Señor
+señor
 él
 decir
 perdónemir
 si
 él
-preguntar
-tú
-ordenar
+pregunto
+te
+ordeno
 que
 yo
 pregunt
@@ -1604,7 +1607,7 @@ qué
 ejercer
 su
 poder
-Sobre
+sobre
 todo
 contestar
 el
@@ -1667,11 +1670,11 @@ rey
 y
 obedecer
 en
-seguida
+seguido
 pues
 yo
 no
-tolerar
+tolero
 el
 indisciplina
 yo
@@ -1681,7 +1684,7 @@ uno
 puesta
 de
 sol
-demar
+Deme
 ese
 gusto
 Ordénele
@@ -1717,7 +1720,7 @@ pregunta
 uno
 vez
 que
-él
+el
 haber
 formular
 Tendrás
@@ -1747,7 +1750,7 @@ ese
 el
 principito
 bostezar
-lamentar
+Lamentaba
 su
 puesta
 de
@@ -1791,12 +1794,12 @@ uno
 súbdito
 no
 tú
-vayar
+vaya
 y
 tú
 hacer
 ministro
-ministro
+Ministro
 de
 qué
 De
@@ -1826,7 +1829,7 @@ inclinar
 para
 echar
 uno
-ojeada
+ojeado
 al
 otro
 lado
@@ -1858,7 +1861,7 @@ A
 yo
 no
 yo
-gustar
+gusta
 condenar
 a
 muerte
@@ -1894,7 +1897,7 @@ viejo
 monarca
 decir
 Si
-Vuestra
+vuestro
 Majestad
 desear
 ser
@@ -1925,7 +1928,7 @@ Como
 el
 rey
 no
-respondierar
+respondiera
 nada
 el
 principito
@@ -1938,8 +1941,8 @@ suspiro
 emprender
 el
 marcha
-tú
-nombrar
+te
+nombro
 mi
 embajador
 él
@@ -1959,7 +1962,7 @@ persona
 mayor
 ser
 mucho
-extraño
+extraña
 él
 decir
 el
@@ -1970,12 +1973,12 @@ mismo
 durante
 el
 viaje
-document11
+XI
 el
 segundo
 planeta
 estar
-habitado
+habitar
 por
 uno
 vanidoso
@@ -2005,6 +2008,7 @@ demá
 hombre
 ser
 admirador
+document5
 Buenos
 día
 decir
@@ -2097,12 +2101,12 @@ oir
 el
 vanidoso
 sólo
-oir
+oyen
 el
 alabanza
 tú
 yo
-admirar
+admira
 mucho
 verdad
 preguntar
@@ -2142,7 +2146,7 @@ solo
 en
 tu
 planeta
-hazme
+Hazme
 ese
 favor
 admíramar
@@ -2150,7 +2154,7 @@ de
 todo
 manera
 Bueno
-tú
+te
 admirar
 decir
 el
@@ -2174,7 +2178,7 @@ persona
 mayor
 ser
 mucho
-extraño
+extraña
 él
 decir
 para
@@ -2184,12 +2188,12 @@ principito
 durante
 su
 viaje
-document12
+xii
 el
 tercer
 planeta
 estar
-habitado
+habitar
 por
 uno
 bebedor
@@ -2197,7 +2201,7 @@ ser
 uno
 visita
 mucho
-corto
+corta
 pues
 hundir
 al
@@ -2214,7 +2218,7 @@ al
 bebedor
 que
 estar
-sentado
+sentar
 en
 silencio
 ante
@@ -2222,7 +2226,7 @@ uno
 sinnúmero
 de
 botella
-vacío
+vacía
 y
 otro
 tanto
@@ -2253,7 +2257,7 @@ el
 principito
 ya
 compadecido
-para
+Para
 olvidar
 que
 sentir
@@ -2307,7 +2311,7 @@ persona
 mayor
 ser
 mucho
-extraño
+extraña
 seguir
 decir él
 para
@@ -2317,7 +2321,7 @@ principito
 durante
 su
 viaje
-document13
+xiii
 Buenos
 día
 él
@@ -2365,7 +2369,7 @@ tercero
 vez
 ser
 este
-decir
+Decía
 pues
 quinientos
 uno
@@ -2389,7 +2393,7 @@ que
 dejar
 en
 paz
-millón
+Millones
 de
 ese
 pequeño
@@ -2411,7 +2415,7 @@ Abejas
 no
 uno
 cosita
-dorado
+dorada
 que
 hacer
 desvariar
@@ -2479,7 +2483,7 @@ Que
 el
 estrella
 ser
-tuya
+tuyas
 sí
 yo
 haber
@@ -2488,11 +2492,11 @@ uno
 rey
 que
 el
-rey
+reyes
 no
 poseer
 nada
-reinar
+Reinan
 ser
 mucho
 diferente
@@ -2509,6 +2513,7 @@ servir
 para
 ser
 rico
+document6
 Y
 de
 qué
@@ -2524,7 +2529,7 @@ más
 estrella
 si
 alguien
-él
+el
 descubrir
 Este
 él
@@ -2534,7 +2539,7 @@ a
 mismo
 el
 principito
-razonar
+razona
 poco
 más
 o
@@ -2633,7 +2638,7 @@ todo
 satisfecho
 Pero
 poder
-colocar él
+colocarla
 en
 uno
 banco
@@ -2651,7 +2656,7 @@ papel
 el
 número
 de
-estrella
+estrellas
 que
 tener
 y
@@ -2721,7 +2726,7 @@ persona
 mayor
 decididamente
 ser
-extraordinario
+extraordinaria
 él
 decir
 a
@@ -2732,7 +2737,7 @@ sencillez
 durante
 el
 viaje
-document14
+XIV
 Cuando
 llegar
 al
@@ -2804,7 +2809,7 @@ el
 consigna
 Buenos
 día
-y
+Y
 apagar
 su
 farol
@@ -2908,7 +2913,7 @@ para
 que
 descans
 cuando
-querer
+quierar
 yo
 querer
 descansar
@@ -2931,7 +2936,7 @@ proseguir
 Con
 ese
 no
-adelantar
+adelanto
 gran
 cosa
 decir
@@ -2942,7 +2947,7 @@ que
 a
 yo
 yo
-gustar
+gusta
 en
 el
 vida
@@ -2965,7 +2970,7 @@ el
 farolero
 Buenos
 día
-y
+Y
 apagar
 su
 farol
@@ -2976,7 +2981,7 @@ de
 quien
 poder
 haber yo
-hacer
+hecho
 amigo
 pero
 su
@@ -2990,7 +2995,7 @@ haber
 lugar
 para
 dos
-document15
+xv
 el
 sexto
 planeta
@@ -3000,7 +3005,7 @@ vez
 más
 grande
 estar
-habitado
+habitar
 por
 uno
 anciano
@@ -3008,6 +3013,7 @@ que
 escribir
 grande
 libro
+document7
 Anda
 uno
 explorador
@@ -3094,7 +3100,7 @@ ser
 uno
 verdadero
 oficio
-dirigir
+Dirigió
 uno
 mirada
 a
@@ -3157,7 +3163,7 @@ qué
 uno
 explorador
 que
-mentir
+mintiera
 ser
 uno
 catástrofe
@@ -3173,7 +3179,7 @@ ser
 uno
 explorador
 que
-bebierar
+beber
 demasiado
 Por
 qué
@@ -3195,7 +3201,7 @@ donde
 sólo
 haber
 uno
-conocer
+Conozco
 a
 alguien
 decir
@@ -3247,9 +3253,9 @@ tú
 ser
 uno
 explorador
-vas
+Vas
 a
-describirme
+describir yo
 tu
 planeta
 Y
@@ -3284,7 +3290,7 @@ Porque
 el
 flor
 ser
-efímero
+efímera
 qué
 significar
 efímero
@@ -3342,7 +3348,7 @@ formulado
 Significa
 que
 estar
-amenazado
+amenazar
 de
 próximo
 desaparición
@@ -3372,7 +3378,7 @@ tener
 mucho
 buen
 reputación
-y
+Y
 el
 principito
 partir
@@ -3380,7 +3386,7 @@ pensar
 en
 su
 flor
-document16
+xvi
 el
 séptimo
 planeta
@@ -3389,7 +3395,7 @@ por
 consiguiente
 el
 Tierra
-document17
+xvii
 Buenas
 noches
 decir
@@ -3463,7 +3469,7 @@ el
 serpiente
 Y
 qué
-venir
+vién
 tú
 a
 hacer
@@ -3510,12 +3516,13 @@ serpiente
 el
 principito
 el
-miró
+mirar
 largo
 rato
 y
 él
 decir
+document8
 Eres
 uno
 bicho
@@ -3543,19 +3550,19 @@ principito
 sonreír
 no
 yo
-parecer
+parez
 mucho
 poderoso
 ni
 siquiera
-tener
-pata
+tién
+patas
 ni
-tan
+tanto
 siquiera
 poder
 viajar
-poder
+Puedo
 llevarte
 más
 lejos
@@ -3604,7 +3611,7 @@ principito
 no
 responder
 yo
-dar
+da
 lástima
 tanto
 débil
@@ -3616,7 +3623,7 @@ granito
 si
 alguno
 día
-echas
+echa
 mucho
 de
 menos
@@ -3624,7 +3631,7 @@ tu
 planeta
 poder
 ayudarte
-poder
+Puedo
 Oh
 decir
 el
@@ -3640,7 +3647,7 @@ con
 enigma
 yo
 el
-resolver
+resuelvo
 todo
 decir
 el
@@ -3648,7 +3655,7 @@ serpiente
 y
 él
 callar
-document18
+xviii
 el
 principito
 atravesar
@@ -3694,7 +3701,7 @@ haber
 ver
 pasar
 uno
-caravana
+caraván
 Adiós
 decir
 el
@@ -3703,7 +3710,7 @@ Adiós
 decir
 el
 flor
-document19
+xix
 Buenos
 día
 exclamar
@@ -3756,7 +3763,7 @@ repetir
 el
 eco
 primero
-document20
+xx
 Buenos
 día
 decir
@@ -3775,7 +3782,7 @@ el
 principito
 el
 mirar
-todo
+todas
 él
 parecer
 tanto
@@ -3790,14 +3797,14 @@ preguntar
 estupefacto
 ser
 el
-rosas
+rosa
 responder
 este
 Ah
 exclamar
 el
 principito
-document21
+xxi
 entonces
 aparecer
 el
@@ -3843,7 +3850,7 @@ zorro
 decir
 el
 zorro
-ven
+Ven
 a
 jugar
 conmigo
@@ -3857,13 +3864,13 @@ triste
 no
 poder
 jugar
-tú
+contigo
 decir
 el
 zorro
 no
 estar
-domesticado
+domesticar
 Ah
 perdón
 decir
@@ -3881,7 +3888,7 @@ significar
 domesticar
 tú
 no
-ser
+eres
 de
 aquí
 decir
@@ -3918,7 +3925,7 @@ ser
 uno
 cosa
 ya
-olvidado
+olvidar
 decir
 el
 zorro
@@ -4023,7 +4030,8 @@ no
 tener
 mucho
 tiempo
-haber
+document9
+He
 de
 buscar
 amigo
@@ -4088,8 +4096,8 @@ hacerte
 daño
 pero
 tú
-haber
-querer
+has
+querido
 que
 tú
 domesticar
@@ -4098,7 +4106,7 @@ decir
 el
 zorro
 Y
-va
+vas
 a
 llorar
 decir
@@ -4106,7 +4114,7 @@ decir
 principito
 seguro
 no
-ganar
+gana
 nada
 Gano
 decir
@@ -4123,11 +4131,11 @@ trigo
 y
 luego
 añadir
-ir tú
+Vete
 a
 ver
 el
-rosa
+rosas
 comprenderás
 que
 el
@@ -4137,7 +4145,7 @@ ser
 en
 el
 mundo
-volver
+Volverás
 a
 decir yo
 adiós
@@ -4173,10 +4181,10 @@ en
 el
 mundo
 el
-rosas
+rosa
 él
 sentir
-molesto
+molesta
 oir
 al
 principito
@@ -4216,7 +4224,7 @@ el
 tiempo
 que
 tú
-haber
+has
 perder
 con
 él
@@ -4247,7 +4255,7 @@ a
 fin
 de
 recordar él
-document22
+xxii
 Buenos
 día
 decir
@@ -4259,7 +4267,7 @@ responder
 el
 guardavía
 qué
-hacer
+haz
 aquí
 él
 preguntar
@@ -4304,7 +4312,7 @@ del
 guardavía
 tener
 mucho
-prís
+prisa
 decir
 el
 principito
@@ -4370,7 +4378,7 @@ uno
 tercer
 rápido
 iluminado
-van
+Van
 perseguir
 a
 el
@@ -4408,7 +4416,7 @@ tener
 decir
 el
 guardavía
-document23
+XXIII
 Buenos
 día
 decir
@@ -4497,12 +4505,12 @@ minuto
 pensar
 el
 principito
-caminarir
+caminar
 suavemente
 hacia
 uno
 fuente
-document24
+xxiv
 ser
 el
 octavo
@@ -4529,6 +4537,7 @@ mi
 provisión
 de
 agua
+document10
 mi
 amigo
 el
@@ -4601,7 +4610,7 @@ bastar
 el
 principito
 yo
-miró
+mirar
 y
 responder
 a
@@ -4615,7 +4624,7 @@ a
 buscar
 uno
 pozo
-tener
+Tuve
 uno
 gesto
 de
@@ -4651,12 +4660,12 @@ el
 noche
 y
 el
-estrella
+estrellas
 comenzar
 a
 brillar
 yo
-él
+el
 ver
 como
 en
@@ -4680,7 +4689,7 @@ danzar
 en
 mi
 mente
-tener
+Tienes
 sed
 tú
 también
@@ -4721,7 +4730,7 @@ interrogar él
 el
 principito
 estar
-cansado
+cansar
 y
 él
 sentar
@@ -4741,7 +4750,7 @@ decir
 el
 estrella
 ser
-hermoso
+hermosa
 por
 uno
 flor
@@ -4752,11 +4761,11 @@ ver
 Respondí
 seguramente
 y
-mire 
+miré
 sin
 hablar
 el
-pliegue
+pliegues
 que
 el
 arena
@@ -4784,11 +4793,11 @@ ser
 el
 pozo
 que
-ocultar
+oculto
 en
 alguno
 sitio
-Mi
+mi
 casa
 ocultar
 uno
@@ -4806,7 +4815,7 @@ al
 principito
 ya
 él
-tratar
+trate
 de
 el
 casa
@@ -4823,7 +4832,7 @@ embellecir
 ser
 invisible
 yo
-gustar
+gusta
 decir
 el
 principito
@@ -4844,7 +4853,7 @@ alba
 descubrí
 el
 pozo
-document25
+XXV
 el
 hombre
 decir
@@ -4910,7 +4919,7 @@ gimeír
 como
 uno
 viejo
-veleta
+veleto
 cuando
 el
 viento
@@ -4926,7 +4935,7 @@ despertar
 al
 pozo
 y
-canta
+cantar
 no
 querer
 que
@@ -5028,6 +5037,7 @@ buscar
 con
 el
 corazón
+document11
 yo
 haber
 beber
@@ -5058,7 +5068,7 @@ triste
 ser
 necesario
 que
-cump él
+cumpla
 tu
 promesa
 decir
@@ -5097,7 +5107,7 @@ dibujo
 el
 principito
 el
-miró
+mirar
 y
 decir
 reir
@@ -5170,8 +5180,8 @@ tener
 proyecto
 que
 yo
-ignorar
-pero
+ignoro
+Pero
 no
 yo
 responder
@@ -5273,7 +5283,7 @@ yo
 tú
 esperar
 aquí
-volver
+Vuelve
 mañana
 por
 el
@@ -5299,10 +5309,10 @@ a
 llorar
 uno
 poco
-document26
+xxvi
 no
 tú
-acuerdas
+acuerda
 no
 ser
 aquí
@@ -5362,7 +5372,7 @@ no
 tener
 más
 que
-esperarmar
+esperarme
 que
 allí
 estar
@@ -5446,14 +5456,14 @@ char él
 también
 con
 el
-serpiente
+serpient
 yo
 alegrar
 decir
 el
 principito
 que
-hayas
+haya
 encontrado
 él
 que
@@ -5462,7 +5472,7 @@ a
 tu
 máquina
 así
-podrar
+podrás
 volver
 a
 tu
@@ -5534,10 +5544,11 @@ tener
 también
 el
 bozal
-y
+document12
+Y
 sonreir
 melancólicamente
-esperé
+Esperé
 uno
 buen
 rato
@@ -5551,7 +5562,7 @@ calor
 poco
 a
 poco
-has
+Has
 tener
 miedo
 muchachito
@@ -5566,7 +5577,7 @@ con
 dulzura
 este
 noche
-ir
+voy
 a
 tener
 más
@@ -5610,14 +5621,14 @@ todo
 este
 historia
 de
-serpiente
+serpient
 de
 cita
 y
 de
-estrella
+estrellas
 ser
-tan
+tanto
 sólo
 uno
 pesadilla
@@ -5628,7 +5639,7 @@ no
 responder
 a
 mi
-pregunta
+preguntar
 y
 decir
 él
@@ -5645,7 +5656,7 @@ que
 el
 flor
 si
-tú
+te
 gustar
 uno
 flor
@@ -5677,7 +5688,7 @@ agua
 el
 que
 yo
-distir
+distar
 a
 beber
 gracias
@@ -5692,13 +5703,13 @@ como
 uno
 música
 tú
-acuerdas
+acuerda
 qué
 buen
 ser
 sí
 cierto
-y
+Y
 rio
 uno
 vez
@@ -5708,7 +5719,7 @@ muchachito
 muchachito
 cómo
 yo
-gustar
+gusta
 oír
 tu
 risa
@@ -5729,7 +5740,7 @@ rio
 nuevamente
 Cuando
 tú
-hayar
+haya
 consolado
 siempre
 él
@@ -5739,7 +5750,7 @@ estarás
 contento
 de
 haber yo
-conocer
+conocido
 y
 él
 rio
@@ -5777,7 +5788,7 @@ este
 noche
 saber
 no
-venir
+venga
 no
 tú
 dejar
@@ -5788,7 +5799,7 @@ uno
 poco
 que
 yo
-morir
+muero
 ser
 así
 no
@@ -5796,7 +5807,7 @@ valer
 el
 pena
 que
-vengar
+vengas
 a
 ver
 ese
@@ -5806,7 +5817,7 @@ dejar
 pero
 estar
 preocupado
-tú
+te
 decir
 este
 por
@@ -5820,12 +5831,12 @@ serpiente
 ser
 mala
 a
-veces
+vez
 morder
 por
 gusto
 haber
-decir
+dicho
 que
 no
 tú
@@ -5878,10 +5889,10 @@ y
 todavía
 él
 atormentar
-has
+Has
 hacer
 mal
-tendrás
+Tendrás
 pena
 parecer
 que
@@ -5916,13 +5927,13 @@ corteza
 viejo
 que
 él
-abandonar
+abandona
 no
 ser
 nada
-triste
+trist
 el
-viejo
+vieja
 corteza
 yo
 yo
@@ -5968,7 +5979,7 @@ ser
 tanto
 divertido
 tú
-tendrar
+tendrás
 quinientos
 millón
 de
@@ -5988,7 +5999,7 @@ estar
 llorar
 ser
 allí
-déjamir
+déjame
 ir
 solo
 él
@@ -6034,7 +6045,8 @@ estar
 ese
 ser
 todo
-vacilar
+document13
+Vaciló
 todavía
 uno
 instante
@@ -6081,10 +6093,10 @@ causa
 de
 el
 arena
-document27
+xxvii
 qué
 haber
-suceder
+sucedido
 en
 su
 planeta
@@ -6097,7 +6109,7 @@ comer
 el
 flor
 Pero
-miren
+mirar
 al
 cielo
 y
@@ -6109,7 +6121,7 @@ haber
 comer
 el
 flor
-y
+Y
 veréis
 cómo
 todo

@@ -1,5 +1,6 @@
 import spacy
 import re 
+import pdfquery
 nlp = spacy.load("es_core_news_sm")#cargar el modelo de lenguaje español
 
 ROMANOS = re.compile(r"^\s*([IVXLCDM]+)[\.\s]*$", re.IGNORECASE)
@@ -35,8 +36,6 @@ def eliminar_duplicados(mis_lemmas):
     
     return palabras_unicas
          
-
-import pdfquery
 # aqui extraemos el texto de un pdf
 pdf = pdfquery.PDFQuery("principito.pdf")
 pdf.load()
@@ -45,19 +44,25 @@ text = [t.text for t in text_elements if t.text is not None]
 
 # Extraer texto de un PDF a un txt archivo boludo 
 with open("principito.txt", "w", encoding="utf-8") as f:
-    f.write("DOCUMENT1\n")
+    contador = 0  # Empieza en 0
+    decimal_value = 1
+    f.write(f"DOCUMENT{decimal_value}\n")  # Escribe el primer documento
+    
     for line in text:
-        if line.strip():
-              match = ROMANOS.match(line)
-              if match:
-                    roman_numeral = match.group(1).upper()
-                    decimal_value = romano_decimal(roman_numeral)
-                    f.write(f"DOCUMENT{decimal_value}\n")
-              else:
-                    f.write(line + "\n")
-                
-            
-print("Texto extraído del PDF y guardado en principito.txt")
+        if line.strip():  # Si la línea no está vacía
+            # como estamos llendo linea por linea nesesitamos usar algp para dividir palabra por palabra
+            palabras = line.split()
+            for palabra in palabras:
+                 f.write(palabra + "\n")  # Escribe cada palabra en una nueva línea
+                 contador += 1  # Incrementa el contador por cada palabra
+            # Cuando llegues a 500 líneas, cambia de documento
+            if contador >= 500:
+                contador = 0  # Reinicia el contador
+                decimal_value += 1
+                f.write(f"\nDOCUMENT{decimal_value}\n")  # Nueva sección
+                    
+                       
+print(f"Texto extraído del PDF y guardado en principito.txt", "con divisiones de DOCUMENT cada 500 palabras."," total de DOCUMENTS:",{decimal_value} )
 
 # alchile lematizamos el texto del archivo txt pero me revolvi xd 
 with open("principito.txt", "r", encoding="utf-8") as f:
@@ -67,8 +72,6 @@ with open("principito.txt", "r", encoding="utf-8") as f:
         f_out.write("\n".join(lemmas))
 
 print("Lematización completada y guardada en principito_lemas.txt")
-
-
 
 # creamos un diccionario de lemas 
 with open("principito_lemas.txt", "r", encoding="utf-8") as f:
