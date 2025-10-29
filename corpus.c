@@ -162,7 +162,7 @@ int** dic_in_topic(char *filename2, char *filename3) {
     return mtx_2;
 }
 
-int ** new_positions(filename1, filename2, filename3,l) {
+/*int ** new_positions(filename1, filename2, filename3,l) {
     float betha = 50/300;
     float alfa = 0.013;
     float **mtx_1 = word_in_topic(filename1, filename2);
@@ -222,7 +222,7 @@ int ** new_positions(filename1, filename2, filename3,l) {
     
 
 }
-
+*/
 int main() {
     srand(time(NULL));
     
