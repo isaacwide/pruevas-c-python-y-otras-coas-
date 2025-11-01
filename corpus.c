@@ -3,6 +3,10 @@
 #include<string.h>
 #include<time.h>
 
+#define documentos 13
+#define temas 50
+#define palabras_dic 1195
+
 // Declaración adelantada de la función
 float numeros_aleatorios();
 int es_delimitador(char *palabra);
@@ -34,14 +38,14 @@ int es_delimitador(char *palabra) {
     return 0;
 }
 
-int** word_in_topic(char *filename1, char *filename2) {
+float** word_in_topic(char *filename1, char *filename2) {
     FILE *file1 = fopen(filename1, "r");
     FILE *file2 = fopen(filename2, "r");
     
     // Asignar memoria dinámica para la matriz
-    float **mtx_1 = (float**)malloc(13 * sizeof(float*));
-    for(int i = 0; i < 13; i++) {
-        mtx_1[i] = (float*)calloc(300, sizeof(float)); // calloc inicializa en 0.0
+    float **mtx_1 = (float**)malloc(documentos * sizeof(float*));
+    for(int i = 0; i < documentos; i++) {
+        mtx_1[i] = (float*)calloc(temas, sizeof(float)); // calloc inicializa en 0.0
     }
 
     if(file1 == NULL || file2 == NULL) {
@@ -49,7 +53,7 @@ int** word_in_topic(char *filename1, char *filename2) {
         if(file1) fclose(file1);
         if(file2) fclose(file2);
         // Liberar memoria antes de retornar
-        for(int i = 0; i < 27; i++) {
+        for(int i = 0; i < documentos; i++) {
             free(mtx_1[i]);
         }
         free(mtx_1);
@@ -57,8 +61,8 @@ int** word_in_topic(char *filename1, char *filename2) {
     }
 
     double rangos[301] = {0};
-    for(int i = 0; i < 300; i++){
-        rangos[i+1] = rangos[i] + 0.00333;
+    for(int i = 0; i < temas; i++){
+        rangos[i+1] = rangos[i] + 0.02;
     }
 
     char palabra[100];
@@ -68,9 +72,9 @@ int** word_in_topic(char *filename1, char *filename2) {
         if (es_delimitador(palabra)){
             l++;
         } else {
-            if(l > 0 && l <= 13) {
+            if(l > 0 && l <= documentos) {
                 float probabilidad = numeros_aleatorios();
-                for(int j = 0; j < 300; j++){
+                for(int j = 0; j < temas; j++){
                     if (probabilidad >= rangos[j] && probabilidad < rangos[j+1]){
                         mtx_1[l-1][j]++;
                         break;
@@ -80,32 +84,12 @@ int** word_in_topic(char *filename1, char *filename2) {
         }
     }
 
-    FILE *output = fopen("matrices.txt", "w");
-
-    if (output == NULL) {
-        printf("Error al abrir el archivo de salida.\n");
-        fclose(file1);
-        fclose(file2);
-        // Liberar memoria antes de retornar
-        for(int i = 0; i < 27; i++) {
-            free(mtx_1[i]);
-        }
-        free(mtx_1);
-        return NULL;
-    }
-    for(int i = 0; i < 13; i++){
-        for(int j = 0; j < 300; j++){
-            fprintf(output, "%d ", mtx_1[i][j]);
-        }
-        fprintf(output, "\n");
-    }
-    fclose(output);
     fclose(file1);
     fclose(file2);
     return mtx_1;
 }
 
-int** dic_in_topic(char *filename2, char *filename3) {
+float** dic_in_topic(char *filename2, char *filename3) {
     FILE *file_dic = fopen(filename3, "r");
     if (file_dic == NULL) {
         printf("Error al abrir el archivo diccionario: %s\n", filename3);
@@ -120,50 +104,83 @@ int** dic_in_topic(char *filename2, char *filename3) {
     fclose(file_dic);
     printf("Diccionario cargado con %d palabras.\n", num_palabras_dic);
 
-    double rangos[301] = {0};
-    for(int i = 0; i < 300; i++){
-        rangos[i+1] = rangos[i] + (1.0 / 300.0);
+    double rangos[51] = {0};
+    for(int i = 0; i < temas; i++){
+        rangos[i+1] = rangos[i] + (1.0 / 50.0);
     }
 
     // Asignar memoria dinámica para la matriz
     float **mtx_2 = (float**)malloc(num_palabras_dic * sizeof(float*));
     for(int i = 0; i < num_palabras_dic; i++) {
-        mtx_2[i] = (float*)calloc(300, sizeof(float));
+        mtx_2[i] = (float*)calloc(temas, sizeof(float));  // SOLO 50, NO 300
     }
-
-    for (int i = 0; i < num_palabras_dic; i++) {
+    
+    // CORREGIR ESTE BUCLE - asignar tópico aleatorio a cada palabra
+    for(int k = 0; k < num_palabras_dic; k++) {
         float probabilidad = numeros_aleatorios();
-        for (int j = 0; j < 300; j++) {
-            if (probabilidad >= rangos[j] && probabilidad < rangos[j+1]) {
-                mtx_2[i][j] = 1;
-                break;
+        for(int j = 0; j < temas; j++){
+            if (probabilidad >= rangos[j] && probabilidad < rangos[j+1]){
+                mtx_2[k][j]++;
+                break;  // Importante: salir después de asignar
             }
         }
     }
 
-    FILE *out2 = fopen("matriz2.txt","w");
-    if (out2 == NULL) {
-        printf("Error al abrir matriz2.txt para escritura\n");
-        // Liberar memoria antes de retornar
-        for(int i = 0; i < num_palabras_dic; i++) {
-            free(mtx_2[i]);
-        }
-        free(mtx_2);
-        return NULL;
-    }
-    
-    for (int i = 0; i < num_palabras_dic; i++) {
-        for (int j = 0; j < 300; j++) {
-            fprintf(out2,"%d ", mtx_2[i][j]);
-        }
-        fprintf(out2,"\n");
-    }
-    fclose(out2);
     return mtx_2;
 }
 
-/*int ** new_positions(filename1, filename2, filename3,l) {
-    float betha = 50/300;
+float** parametro_sigma(char *filename2, char *filename3){
+    
+    float betha = 1.0;  // 50/50 = 1.0
+    
+    printf("Cargando dic_in_topic en parametro_sigma...\n");
+    float **mtx_2 = dic_in_topic(filename2, filename3);
+    
+    if (mtx_2 == NULL) {
+        printf("Error: mtx_2 es NULL\n");
+        return NULL;
+    }
+    
+    printf("Calculando n_k...\n");
+    float* n_k = (float*)calloc(palabras_dic, sizeof(float));
+    
+    // Calcular n_k para TODAS las palabras (1296)
+    for(int i = 0; i < palabras_dic; i++){
+        for(int j = 0; j < temas; j++){
+            n_k[i] += mtx_2[i][j];
+        }
+    }
+    
+    printf("Asignando memoria para sigma...\n");
+    // Asignar memoria para sigma - TODAS las 1296 filas
+    float **sigma = (float**)malloc(palabras_dic * sizeof(float*));
+    for(int i = 0; i < palabras_dic; i++){  // CAMBIAR 1195 a 1296
+        sigma[i] = (float*)calloc(temas, sizeof(float));
+    }
+    
+    printf("Calculando sigma...\n");
+    // Calcular sigma
+    for(int k = 0; k < palabras_dic; k++){
+        for(int t = 0; t < temas; t++){
+            float a = mtx_2[k][t] + betha;
+            float b = n_k[k] + (betha * 50);  // Sumar betha * número de tópicos
+            
+            if (b > 0) {
+                sigma[k][t] = a / b;
+            } else {
+                sigma[k][t] = 0.0;
+            }
+        }
+    }
+    
+    printf("Sigma calculado correctamente\n");
+    free(n_k);
+    
+    return sigma;
+}
+
+/*float ** new_positions(filename1, filename2, filename3) {
+    float betha = 50/50;
     float alfa = 0.013;
     float **mtx_1 = word_in_topic(filename1, filename2);
     float **mtx_2 = dic_in_topic(filename2, filename3);
@@ -176,14 +193,14 @@ int** dic_in_topic(char *filename2, char *filename3) {
         n_m[i] = 0;
     }
     for(int i = 0; i < 13; i++){
-        for(int j = 0; j < 300; j++){
+        for(int j = 0; j < 50; j++){
             n_m[i] += mtx_1[i][j] ;
         }
         
     } 
-    for(int i = 0; i < 1296; i++){
-        for(int j = 0; j < 300; j++){
-            n_m[i] += mtx_1[i][j] ;
+    for(int i = 0; i < 1195; i++){
+        for(int j = 0; j < 50; j++){
+            n_k[i] += mtx_2[i][j] ;
         }
         
     } 
@@ -230,8 +247,82 @@ int main() {
     char filename2[] = "topicos.txt";
     char filename3[] = "dic.txt";
 
-    word_in_topic(filename1, filename2);
-    dic_in_topic(filename2, filename3);
+    printf("Generando word_in_topic...\n");
+    float **mtx1 = word_in_topic(filename1, filename2);
     
+    printf("Generando dic_in_topic...\n");
+    float **mtx2 = dic_in_topic(filename2, filename3);
+    
+    printf("Calculando parametro_sigma...\n");
+    float **estimadores = parametro_sigma(filename2, filename3);  // UNA SOLA VEZ
+    
+    if (estimadores == NULL) {
+        printf("Error: estimadores es NULL\n");
+        return 1;
+    }
+
+    // Guardar matriz2
+    FILE *out2 = fopen("matriz2.txt","w");
+    if (out2 == NULL) {
+        printf("Error al abrir matriz2.txt para escritura\n");
+        return 1;
+    }
+    
+    for (int i = 0; i < palabras_dic; i++) {
+        for (int j = 0; j < temas; j++) {
+            fprintf(out2,"%.0f ", mtx2[i][j]);
+        }
+        fprintf(out2,"\n");
+    }
+    fclose(out2);
+    printf("matriz2.txt guardado correctamente\n");
+
+    // Guardar matrices (mtx1)
+    FILE *output = fopen("matrices.txt", "w");
+    if (output == NULL) {
+        printf("Error al abrir el archivo de salida1.\n");
+        return 1;
+    }
+    
+    for(int i = 0; i < 13; i++){
+        for(int j = 0; j < temas; j++){
+            fprintf(output, "%.0f ", mtx1[i][j]);
+        }
+        fprintf(output, "\n");
+    }
+    fclose(output);
+    printf("matrices.txt guardado correctamente\n");
+
+    // Guardar sigma
+    FILE *estimador1 = fopen("sigma.txt","w");
+    if (estimador1 == NULL) {
+        printf("Error al abrir sigma.txt para escritura\n");
+        return 1;
+    }
+    
+    printf("Escribiendo sigma.txt...\n");
+    for (int i = 0; i < palabras_dic; i++) {
+        for (int j = 0; j < temas; j++) {
+            fprintf(estimador1,"%f ", estimadores[i][j]);
+        }
+        fprintf(estimador1,"\n");
+    }
+    fclose(estimador1);
+    printf("sigma.txt guardado correctamente\n");
+    
+    // Liberar memoria
+    for(int i = 0; i < 13; i++) {
+        free(mtx1[i]);
+    }
+    free(mtx1);
+    
+    for(int i = 0; i < palabras_dic; i++) {
+        free(mtx2[i]);
+        free(estimadores[i]);
+    }
+    free(mtx2);
+    free(estimadores);
+    
+    printf("Programa finalizado exitosamente\n");
     return 0;
 }

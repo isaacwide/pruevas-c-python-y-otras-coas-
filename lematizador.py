@@ -4,25 +4,42 @@ import pdfquery
 
 nlp = spacy.load("es_core_news_sm")
 
-ROMANOS = re.compile(r"^\s*([IVXLCDM]+)[\.\s]*$", re.IGNORECASE)
+
+def eliminar_conectoresydoc(texto_bruto):
+    doc = ["DOCUMENT1", "DOCUMENT2", "DOCUMENT3", "DOCUMENT4", "DOCUMENT5",
+        "DOCUMENT6", "DOCUMENT7", "DOCUMENT8", "DOCUMENT9", "DOCUMENT10",
+        "DOCUMENT11", "DOCUMENT12", "DOCUMENT13", "DOCUMENT14", "DOCUMENT15",
+        "DOCUMENT16", "DOCUMENT17", "DOCUMENT18", "DOCUMENT19", "DOCUMENT20",
+        "DOCUMENT21", "DOCUMENT22", "DOCUMENT23", "DOCUMENT24", "DOCUMENT25",
+        "DOCUMENT26", "DOCUMENT27",
+        "document1", "document2", "document3", "document4", "document5",
+        "document6", "document7", "document8", "document9", "document10",
+        "document11", "document12", "document13", "document14", "document15",
+        "document16", "document17", "document18", "document19", "document20",
+        "document21", "document22", "document23", "document24", "document25",
+        "document26", "document27"]
+    conectores = ["y", "o", "e", "u", "ni", "pero", "mas", "sino", "aunque",
+        "porque", "pues", "si", "cuando", "mientras", "que", "como", "donde",
+        "aun", "así", "también", "además", "luego", "entonces", "por lo tanto",
+        "sin embargo", "no obstante", "así que", "por consiguiente", "de modo que",
+        "antes", "después", "hasta", "desde", "durante", "contra", "entre",
+        "sobre", "bajo", "tras", "según", "mediante", "excepto", "salvo",
+        "incluso", "más allá de", "a pesar de","a","él","de"]
+    
+    ROMANOS = re.compile(r"^\s*([IVXLCDM]+)[\.\s]*$", re.IGNORECASE)
+    
+    for palabra in texto_bruto:
+        if palabra in doc or palabra in conectores or ROMANOS.match(palabra):
+            texto_bruto.remove(palabra)
+    
+    return texto_bruto
+
 
 def lematizar_texto(texto):
     doc = nlp(texto)
     lemmas = [token.lemma_ for token in doc if not token.is_punct and not token.is_space]
     return lemmas
 
-def romano_a_decimal(romano):
-    roman_map = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-    valor_final = 0 
-    prev_value = 0
-    for char in reversed(romano):
-        value = roman_map.get(char.upper(), 0)
-        if value < prev_value:
-            valor_final -= value
-        else:
-            valor_final += value
-        prev_value = value
-    return valor_final
 
 def eliminar_duplicados(lista_lemmas):
     """Elimina duplicados manteniendo el orden"""
@@ -70,8 +87,9 @@ with open("principito.txt", "r", encoding="utf-8") as f:
 print("Lematización completada y guardada en principito_lemas.txt")
 
 # Crear diccionario eliminando duplicados
-dic = eliminar_duplicados(lemmas)  # Usa directamente la lista 'lemmas'
+dic = eliminar_duplicados(lemmas) 
+dic2 = eliminar_conectoresydoc(dic) # Usa directamente la lista 'lemmas'
 with open("dic.txt", "w", encoding="utf-8") as f_out:
-    f_out.write("\n".join(dic))
+    f_out.write("\n".join(dic2))
 
 print(f"Diccionario creado con {len(dic)} palabras únicas en dic.txt")
