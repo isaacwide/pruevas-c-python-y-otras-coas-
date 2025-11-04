@@ -132,16 +132,12 @@ float** dic_in_topic(char *filename2, char *filename3) {
 float** parametro_sigma(char *filename2, char *filename3){
     
     float betha = 1.0;  // 50/50 = 1.0
-    
-    printf("Cargando dic_in_topic en parametro_sigma...\n");
     float **mtx_2 = dic_in_topic(filename2, filename3);
     
     if (mtx_2 == NULL) {
         printf("Error: mtx_2 es NULL\n");
         return NULL;
     }
-    
-    printf("Calculando n_k...\n");
     float* n_k = (float*)calloc(palabras_dic, sizeof(float));
     
     // Calcular n_k para TODAS las palabras (1296)
@@ -150,15 +146,11 @@ float** parametro_sigma(char *filename2, char *filename3){
             n_k[i] += mtx_2[i][j];
         }
     }
-    
-    printf("Asignando memoria para sigma...\n");
     // Asignar memoria para sigma - TODAS las 1296 filas
     float **sigma = (float**)malloc(palabras_dic * sizeof(float*));
     for(int i = 0; i < palabras_dic; i++){  // CAMBIAR 1195 a 1296
         sigma[i] = (float*)calloc(temas, sizeof(float));
     }
-    
-    printf("Calculando sigma...\n");
     // Calcular sigma
     for(int k = 0; k < palabras_dic; k++){
         for(int t = 0; t < temas; t++){
@@ -174,72 +166,65 @@ float** parametro_sigma(char *filename2, char *filename3){
     }
     
     printf("Sigma calculado correctamente\n");
+    
+    // Liberar mtx_2 y n_k
+    for(int i = 0; i < palabras_dic; i++){
+        free(mtx_2[i]);
+    }
+    free(mtx_2);
     free(n_k);
     
     return sigma;
 }
 
-/*float ** new_positions(filename1, filename2, filename3) {
-    float betha = 50/50;
-    float alfa = 0.013;
+float** parametro_gama(char *filename1, char *filename2){
+    
+    float alfa = 0.01;
     float **mtx_1 = word_in_topic(filename1, filename2);
-    float **mtx_2 = dic_in_topic(filename2, filename3);
-
-    // calcularemos los nm suma de la m-esimafila de mtx_1 y la n-esima fila de mtx_2
-    float* n_m =(float*)calloc(13, sizeof(float*));
-    float* n_k =(float*)calloc(1296, sizeof(float*));
     
-    for(int i = 0; i < 13; i++) {
-        n_m[i] = 0;
+    if (mtx_1 == NULL) {
+        printf("Error: mtx_1 es NULL\n");
+        return NULL;
     }
-    for(int i = 0; i < 13; i++){
-        for(int j = 0; j < 50; j++){
-            n_m[i] += mtx_1[i][j] ;
-        }
-        
-    } 
-    for(int i = 0; i < 1195; i++){
-        for(int j = 0; j < 50; j++){
-            n_k[i] += mtx_2[i][j] ;
-        }
-        
-    } 
-
-    float **aux = (float**)malloc(13 * sizeof(float*));
-            for(int i = 0; i < 13; i++) {
-                aux[i] = (float*)calloc(300, sizeof(float)); // calloc inicializa en 0.0
-            }
-
-    do
-    {
-        //auxiliar va a tener los nuevos valores de mtx_1
-        // igual a mtx_1
-        // mtx_1 = aux
-        for(int i = 0; i < 13; i++){
-            for(int j = 0; j < 300; j++){
-                 mtx_1[i][j]= aux[i][j] ;
-            }
-        }
-
-        // limpiazmos aux
-        for(int i = 0; i < 13; i++) {
-            for(int j = 0; j < 300; j++){
-                 aux[i][j]= 0 ;
-            }
-        }
-
-
-        l--;
-    } while(l>=0);
+    float* n_m = (float*)calloc(documentos, sizeof(float));
     
-
-
-
-
+    // Calcular n_m para todos los documentos
+    for(int i = 0; i < documentos; i++){
+        for(int j = 0; j < temas; j++){
+            n_m[i] += mtx_1[i][j];
+        }
+    }
+    // Asignar memoria para gama
+    float **gama = (float**)malloc(documentos * sizeof(float*));
+    for(int i = 0; i < documentos; i++){
+        gama[i] = (float*)calloc(temas, sizeof(float));
+    }
+    // Calcular gama
+    for(int k = 0; k < documentos; k++){
+        for(int t = 0; t < temas; t++){
+            float a = mtx_1[k][t] + alfa;
+            float b = n_m[k] + (alfa * temas);  // Sumar alfa * número de tópicos
+            
+            if (b > 0) {
+                gama[k][t] = a / b;
+            } else {
+                gama[k][t] = 0.0;
+            } 
+        }
+    }
     
-
+    printf("Gama calculado correctamente\n");
+    
+    // Liberar mtx_1 y n_m
+    for(int i = 0; i < documentos; i++){
+        free(mtx_1[i]);
+    }
+    free(mtx_1);
+    free(n_m);
+    
+    return gama;
 }
-*/
+
 int main() {
     srand(time(NULL));
     
@@ -254,10 +239,13 @@ int main() {
     float **mtx2 = dic_in_topic(filename2, filename3);
     
     printf("Calculando parametro_sigma...\n");
-    float **estimadores = parametro_sigma(filename2, filename3);  // UNA SOLA VEZ
+    float **sigma = parametro_sigma(filename2, filename3);
     
-    if (estimadores == NULL) {
-        printf("Error: estimadores es NULL\n");
+    printf("Calculando parametro_gama...\n");
+    float **gama = parametro_gama(filename1, filename2);
+    
+    if (sigma == NULL || gama == NULL) {
+        printf("Error: sigma o gama es NULL\n");
         return 1;
     }
 
@@ -284,7 +272,7 @@ int main() {
         return 1;
     }
     
-    for(int i = 0; i < 13; i++){
+    for(int i = 0; i < documentos; i++){
         for(int j = 0; j < temas; j++){
             fprintf(output, "%.0f ", mtx1[i][j]);
         }
@@ -303,25 +291,44 @@ int main() {
     printf("Escribiendo sigma.txt...\n");
     for (int i = 0; i < palabras_dic; i++) {
         for (int j = 0; j < temas; j++) {
-            fprintf(estimador1,"%f ", estimadores[i][j]);
+            fprintf(estimador1,"%f ", sigma[i][j]);
         }
         fprintf(estimador1,"\n");
     }
     fclose(estimador1);
     printf("sigma.txt guardado correctamente\n");
     
+    // Guardar gama
+    FILE *estimador2 = fopen("gamma.txt","w");
+    if (estimador2 == NULL) {
+        printf("Error al abrir gama.txt para escritura\n");
+        return 1;
+    }
+    
+    printf("Escribiendo gama.txt...\n");
+    for (int i = 0; i < documentos; i++) {
+        for (int j = 0; j < temas; j++) {
+            fprintf(estimador2,"%f ", gama[i][j]);
+        }
+        fprintf(estimador2,"\n");
+    }
+    fclose(estimador2);
+    printf("gama.txt guardado correctamente\n");
+    
     // Liberar memoria
-    for(int i = 0; i < 13; i++) {
+    for(int i = 0; i < documentos; i++) {
         free(mtx1[i]);
+        free(gama[i]);
     }
     free(mtx1);
+    free(gama);
     
     for(int i = 0; i < palabras_dic; i++) {
         free(mtx2[i]);
-        free(estimadores[i]);
+        free(sigma[i]);
     }
     free(mtx2);
-    free(estimadores);
+    free(sigma);
     
     printf("Programa finalizado exitosamente\n");
     return 0;
