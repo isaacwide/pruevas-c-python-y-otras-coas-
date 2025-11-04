@@ -6,6 +6,8 @@
 #define documentos 13
 #define temas 50
 #define palabras_dic 1195
+#define betha 1.0
+#define alfa 0.01
 
 // Declaración adelantada de la función
 float numeros_aleatorios();
@@ -129,21 +131,38 @@ float** dic_in_topic(char *filename2, char *filename3) {
     return mtx_2;
 }
 
-float** parametro_sigma(float **mtx_2){
-
-    float betha = 1.0;  // 50/50 = 1.0
-    if (mtx_2 == NULL) {
-        printf("Error: mtx_2 es NULL\n");
-        return NULL;
+float *n_ms(float **mtx_1){
+    float *n_m = (float*)calloc(documentos, sizeof(float));
+    // Calcular n_m para todos los documentos
+    for(int i = 0; i < documentos; i++){
+        for(int j = 0; j < temas; j++){
+            n_m[i] += mtx_1[i][j];
+        }
     }
+
+    return n_m;
+}
+
+float*n_ks(float**mtx_2){
     float* n_k = (float*)calloc(palabras_dic, sizeof(float));
-    
-    // Calcular n_k para TODAS las palabras (1296)
     for(int i = 0; i < palabras_dic; i++){
         for(int j = 0; j < temas; j++){
             n_k[i] += mtx_2[i][j];
         }
     }
+
+    return n_k;
+
+}
+
+float** parametro_sigma(float **mtx_2){
+    if (mtx_2 == NULL) {
+        printf("Error: mtx_2 es NULL\n");
+        return NULL;
+    }
+    // Calcular n_k para TODAS las palabras (1296)
+    float * n_k = n_ks(mtx_2);
+    
     // Asignar memoria para sigma - TODAS las 1296 filas
     float **sigma = (float**)malloc(palabras_dic * sizeof(float*));
     for(int i = 0; i < palabras_dic; i++){  // CAMBIAR 1195 a 1296
@@ -171,20 +190,12 @@ float** parametro_sigma(float **mtx_2){
 
 float** parametro_gama(float **mtx_1){
     
-    float alfa = 0.01;
     
     if (mtx_1 == NULL) {
         printf("Error: mtx_1 es NULL\n");
         return NULL;
     }
-    float* n_m = (float*)calloc(documentos, sizeof(float));
-    
-    // Calcular n_m para todos los documentos
-    for(int i = 0; i < documentos; i++){
-        for(int j = 0; j < temas; j++){
-            n_m[i] += mtx_1[i][j];
-        }
-    }
+    float* n_m = n_ms(mtx_1);
     // Asignar memoria para gama
     float **gama = (float**)malloc(documentos * sizeof(float*));
     for(int i = 0; i < documentos; i++){
@@ -212,19 +223,31 @@ float** parametro_gama(float **mtx_1){
     return gama;
 }
 
-
-float *vector_intervalos(char *palabra,char *san){
-      float* v = (float*)malloc(temas,sizeof(float*));
-    // aca vamos a usar el documento de topicos 
-
-    char palabra[100] ;
-    while (fscanf(san,"%s",palabra) != EOF){
-           
+float *vector_intervalos(char *palabra,char *san,int posDocumento,char *dic,float **mtx_1, float **mtx_2){
+    float* v = (float*)malloc(temas,sizeof(float*));
+    //buscamos la palabra del documento en el diccionario 
+    int posDic = 0;
+    char palabraDic[100];
+    while (fscanf(dic,"%s",palabraDic) != EOF){
+        if(strcmp(palabraDic,palabra)==0){
+            break;
+        }
+        posDic ++;
     }
+    float * n_m = n_ms(mtx_1);
+    float * n_k = n_ks(mtx_2);
+       
     
+    int parametro = 0 ;
+    char palabra[100] ;// para guardar los topicos 
+    while (fscanf(san,"%s",palabra) != EOF){
+        // palabra parameto debe de estar en la matrix
 
 
 
+
+         
+    }
       return v ;
 
 }
@@ -233,6 +256,7 @@ float** matriz_final(float **mtx_1, float **mtx_2, int n , char *docs){
 
     FILE *d = fopen(docs,"r");
     FILE *san = fopen("topicos.txt","read");
+    FILE *dic = fopen("dic.txt","read");
 
     if(d == NULL){
        printf("error al abrir archivo");
@@ -251,7 +275,7 @@ float** matriz_final(float **mtx_1, float **mtx_2, int n , char *docs){
         if (es_delimitador(palabra)){
             l++;
         } else {
-            float *rangos = vector_intervalos(palabra,san);
+            float *rangos = vector_intervalos(palabra,san,l,dic,mtx_1,mtx_2);
             if(l > 0 && l <= documentos) {
                 float probabilidad = numeros_aleatorios();
                 for(int j = 0; j < temas; j++){
@@ -265,12 +289,12 @@ float** matriz_final(float **mtx_1, float **mtx_2, int n , char *docs){
     }
 
 
+    if (n>0){
+        matriz_final(mtx_f,mtx_2, n-1 ,*docs);
+    }else {
+       return mtx_f ;
+    }
 
-
-
-
-     
-    return mtx_f ;
 }
 
 
