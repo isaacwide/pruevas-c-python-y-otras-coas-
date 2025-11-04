@@ -129,11 +129,9 @@ float** dic_in_topic(char *filename2, char *filename3) {
     return mtx_2;
 }
 
-float** parametro_sigma(char *filename2, char *filename3){
-    
+float** parametro_sigma(float **mtx_2){
+
     float betha = 1.0;  // 50/50 = 1.0
-    float **mtx_2 = dic_in_topic(filename2, filename3);
-    
     if (mtx_2 == NULL) {
         printf("Error: mtx_2 es NULL\n");
         return NULL;
@@ -166,21 +164,14 @@ float** parametro_sigma(char *filename2, char *filename3){
     }
     
     printf("Sigma calculado correctamente\n");
-    
-    // Liberar mtx_2 y n_k
-    for(int i = 0; i < palabras_dic; i++){
-        free(mtx_2[i]);
-    }
-    free(mtx_2);
     free(n_k);
     
     return sigma;
 }
 
-float** parametro_gama(char *filename1, char *filename2){
+float** parametro_gama(float **mtx_1){
     
     float alfa = 0.01;
-    float **mtx_1 = word_in_topic(filename1, filename2);
     
     if (mtx_1 == NULL) {
         printf("Error: mtx_1 es NULL\n");
@@ -215,15 +206,14 @@ float** parametro_gama(char *filename1, char *filename2){
     
     printf("Gama calculado correctamente\n");
     
-    // Liberar mtx_1 y n_m
-    for(int i = 0; i < documentos; i++){
-        free(mtx_1[i]);
-    }
-    free(mtx_1);
+    // Liberar n_m
     free(n_m);
     
     return gama;
 }
+
+
+
 
 int main() {
     srand(time(NULL));
@@ -239,10 +229,10 @@ int main() {
     float **mtx2 = dic_in_topic(filename2, filename3);
     
     printf("Calculando parametro_sigma...\n");
-    float **sigma = parametro_sigma(filename2, filename3);
+    float **sigma = parametro_sigma(mtx2);
     
     printf("Calculando parametro_gama...\n");
-    float **gama = parametro_gama(filename1, filename2);
+    float **gama = parametro_gama(mtx1);
     
     if (sigma == NULL || gama == NULL) {
         printf("Error: sigma o gama es NULL\n");
