@@ -213,6 +213,65 @@ float** parametro_gama(float **mtx_1){
 }
 
 
+float *vector_intervalos(char *palabra,char *san){
+      float* v = (float*)malloc(temas,sizeof(float*));
+    // aca vamos a usar el documento de topicos 
+
+    char palabra[100] ;
+    while (fscanf(san,"%s",palabra) != EOF){
+           
+    }
+    
+
+
+
+      return v ;
+
+}
+
+float** matriz_final(float **mtx_1, float **mtx_2, int n , char *docs){
+
+    FILE *d = fopen(docs,"r");
+    FILE *san = fopen("topicos.txt","read");
+
+    if(d == NULL){
+       printf("error al abrir archivo");
+       fclose(d);
+       return NULL;
+    }
+    float **mtx_f = (float**)malloc(documentos * sizeof(float*));
+    for(int i = 0; i < documentos; i++) {
+        mtx_f[i] = (float*)calloc(temas, sizeof(float)); 
+    }
+
+     
+    char palabra[100];
+    int l = 0;
+    while (fscanf(d, "%s", palabra) != EOF) {
+        if (es_delimitador(palabra)){
+            l++;
+        } else {
+            float *rangos = vector_intervalos(palabra,san);
+            if(l > 0 && l <= documentos) {
+                float probabilidad = numeros_aleatorios();
+                for(int j = 0; j < temas; j++){
+                    if (probabilidad >= rangos[j] && probabilidad < rangos[j+1]){
+                        mtx_f[l-1][j]++;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+     
+    return mtx_f ;
+}
 
 
 int main() {
