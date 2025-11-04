@@ -240,15 +240,11 @@ float *vector_intervalos(char *palabra,char *san,int posDocumento,char *dic,floa
     
     int parametro = 0 ;
     char palabra[100] ;// para guardar los topicos 
-    while (fscanf(san,"%s",palabra) != EOF){
-        // palabra parameto debe de estar en la matrix
+    for(int i = 0 ;i<50 ;i++){
 
 
-
-
-         
     }
-      return v ;
+    return v ;
 
 }
 
