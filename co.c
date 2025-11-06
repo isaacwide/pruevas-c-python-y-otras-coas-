@@ -6,7 +6,7 @@
 #define documentos 13
 #define temas 50
 #define palabras_dic 1195
-#define betha 1.0 
+#define betha 1.0
 #define alfa 0.01
 
 // Declaración adelantada de la función
@@ -223,27 +223,76 @@ float** parametro_gama(float **mtx_1){
     return gama;
 }
 
-float *vector_intervalos(char *palabra_buscar, FILE *san, int posDocumento, FILE *dic, float **mtx_1, float **mtx_2){
+// Estructura para almacenar información del documento
+typedef struct {
+    char **palabras;
+    int *doc_id;
+    int num_palabras;
+} DocumentoInfo;
+
+// Función para cargar el diccionario en memoria
+char** cargar_diccionario(char *filename, int *num_palabras) {
+    FILE *f = fopen(filename, "r");
+    if (!f) return NULL;
+    
+    char **dic = (char**)malloc(palabras_dic * sizeof(char*));
+    *num_palabras = 0;
+    char buffer[100];
+    
+    while (fscanf(f, "%s", buffer) != EOF && *num_palabras < palabras_dic) {
+        dic[*num_palabras] = (char*)malloc(strlen(buffer) + 1);
+        strcpy(dic[*num_palabras], buffer);
+        (*num_palabras)++;
+    }
+    fclose(f);
+    return dic;
+}
+
+// Función para buscar palabra en diccionario (en memoria)
+int buscar_en_diccionario(char *palabra, char **diccionario, int num_palabras) {
+    for(int i = 0; i < num_palabras; i++) {
+        if(strcmp(palabra, diccionario[i]) == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+// Cargar documento en memoria
+DocumentoInfo* cargar_documento(char *filename) {
+    FILE *f = fopen(filename, "r");
+    if (!f) return NULL;
+    
+    DocumentoInfo *info = (DocumentoInfo*)malloc(sizeof(DocumentoInfo));
+    info->palabras = (char**)malloc(20000 * sizeof(char*));
+    info->doc_id = (int*)malloc(20000 * sizeof(int));
+    info->num_palabras = 0;
+    
+    char palabra[100];
+    int doc_actual = 0;
+    
+    while (fscanf(f, "%s", palabra) != EOF) {
+        if (es_delimitador(palabra)) {
+            doc_actual++;
+        } else {
+            if (doc_actual > 0 && doc_actual <= documentos) {
+                info->palabras[info->num_palabras] = (char*)malloc(strlen(palabra) + 1);
+                strcpy(info->palabras[info->num_palabras], palabra);
+                info->doc_id[info->num_palabras] = doc_actual - 1;
+                info->num_palabras++;
+            }
+        }
+    }
+    fclose(f);
+    return info;
+}
+
+float *vector_intervalos(int posDic, int posDocumento, float **mtx_1, float **mtx_2){
     float* v = (float*)malloc(temas * sizeof(float));
     
-    // Buscamos la palabra del documento en el diccionario 
-    rewind(dic);  // Reiniciar el puntero del archivo al inicio
-    int posDic = 0;
-    char palabraDic[100];
-    int encontrada = 0;
-    
-    while (fscanf(dic, "%s", palabraDic) != EOF){
-        if(strcmp(palabraDic, palabra_buscar) == 0){
-            encontrada = 1;
-            break;
-        }
-        posDic++;
-    }
-    
-    // Si no se encuentra la palabra, retornar vector vacío
-    if (!encontrada) {
+    if (posDic < 0 || posDic >= palabras_dic) {
         for(int i = 0; i < temas; i++) {
-            v[i] = 0.0;
+            v[i] = 1.0 / temas;
         }
         return v;
     }
@@ -252,21 +301,13 @@ float *vector_intervalos(char *palabra_buscar, FILE *san, int posDocumento, FILE
     float * n_k = n_ks(mtx_2);
     
     for(int i = 0; i < temas; i++){
-        // Calculamos el primer cociente 
-        float a = mtx_2[posDic][i] + betha - 1;
-        if (a < 0){
-            a = 0;
-        }
-        float b = (n_k[posDic] + (betha * temas)) - 1;
+        float a = mtx_2[posDic][i] + betha;
+        float b = n_k[posDic] + (betha * temas);
         
         float primerCociente = (b > 0) ? (a / b) : 0.0;
 
-        // Ahora calculamos el segundo cociente 
-        float a_1 = mtx_1[posDocumento][i] + alfa - 1;
-        if (a_1 < 0){
-            a_1 = 0;
-        }
-        float b_1 = (n_m[posDocumento] + (alfa * temas)) - 1;
+        float a_1 = mtx_1[posDocumento][i] + alfa;
+        float b_1 = n_m[posDocumento] + (alfa * temas);
         
         float segundoCociente = (b_1 > 0) ? (a_1 / b_1) : 0.0;
 
@@ -305,23 +346,24 @@ float** matriz_final(float **mtx_1, float **mtx_2, int n, char *docs){
             l++;
         } else {
             if(l > 0 && l <= documentos) {
+                // Obtener vector de probabilidades para esta palabra específica
                 float *v = vector_intervalos(palabra, san, l-1, dic, mtx_1, mtx_2);
                 
-                // Normalizar el vector v para crear probabilidades
+                // Calcular suma total para normalizar
                 float suma = 0.0;
                 for(int j = 0; j < temas; j++){
                     suma += v[j];
                 }
                 
                 if (suma > 0) {
-                    // Crear rangos de probabilidad acumulada
+                    // Crear rangos acumulativos específicos para esta palabra
                     float *rangos = (float*)malloc((temas + 1) * sizeof(float));
                     rangos[0] = 0.0;
                     for(int j = 0; j < temas; j++){
                         rangos[j+1] = rangos[j] + (v[j] / suma);
                     }
                     
-                    // Asignar tópico basado en probabilidad
+                    // Generar número aleatorio y asignar tópico según los rangos de esta palabra
                     float probabilidad = numeros_aleatorios();
                     for(int j = 0; j < temas; j++){
                         if (probabilidad >= rangos[j] && probabilidad < rangos[j+1]){
@@ -330,6 +372,11 @@ float** matriz_final(float **mtx_1, float **mtx_2, int n, char *docs){
                         }
                     }
                     free(rangos);
+                } else {
+                    // Si suma es 0, asignar tópico aleatorio uniforme
+                    int topico_aleatorio = (int)(numeros_aleatorios() * temas);
+                    if(topico_aleatorio >= temas) topico_aleatorio = temas - 1;
+                    mtx_f[l-1][topico_aleatorio]++;
                 }
                 free(v);
             }
@@ -341,14 +388,20 @@ float** matriz_final(float **mtx_1, float **mtx_2, int n, char *docs){
     fclose(dic);
 
     if (n > 0){
-        // Liberar mtx_f actual antes de la siguiente iteración
+        // Actualizar mtx_1 con los nuevos conteos
+        for(int i = 0; i < documentos; i++) {
+            for(int j = 0; j < temas; j++) {
+                mtx_1[i][j] = mtx_f[i][j];
+            }
+        }
+        
+        // Liberar mtx_f actual
         for(int i = 0; i < documentos; i++) {
             free(mtx_f[i]);
         }
         free(mtx_f);
-        printf("iteracion %d \n",n);
-        return matriz_final(mtx_1, mtx_2, n-1, docs);
         
+        return matriz_final(mtx_1, mtx_2, n-1, docs);
     } else {
         return mtx_f;
     }
@@ -375,7 +428,7 @@ int main() {
     float **gama = parametro_gama(mtx1);
 
     printf("Calculando la ultima matriz...\n");
-    int n = 100;
+    int n = 10000;
     float **mtx_final = matriz_final(mtx1, mtx2, n, filename1);
     
     if (sigma == NULL || gama == NULL) {
