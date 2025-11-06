@@ -9,12 +9,47 @@
 #define betha 1.0 
 #define alfa 0.01
 
+
+typedef struct {
+    char **palabras;
+    int num_palabras;
+} Diccionario;
+
+Diccionario* cargar_diccionario(char *filename) {
+    FILE *file = fopen(filename, "r");
+    if (!file) return NULL;
+    
+    Diccionario *dic = (Diccionario*)malloc(sizeof(Diccionario));
+    dic->palabras = (char**)malloc(1300 * sizeof(char*));
+    dic->num_palabras = 0;
+    
+    char palabra[100];
+    while (fscanf(file, "%s", palabra) != EOF && dic->num_palabras < 1300) {
+        dic->palabras[dic->num_palabras] = (char*)malloc(100 * sizeof(char));
+        strcpy(dic->palabras[dic->num_palabras], palabra);
+        dic->num_palabras++;
+    }
+    fclose(file);
+    return dic;
+}
+
+int buscar_palabra_optimizada(Diccionario *dic, char *palabra) {
+    // Búsqueda lineal simple pero en memoria (MUCHO más rápido que fscanf)
+    for(int i = 0; i < dic->num_palabras; i++) {
+        if(strcmp(dic->palabras[i], palabra) == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 // Declaración adelantada de la función
 float numeros_aleatorios();
 int es_delimitador(char *palabra);
 float numeros_aleatorios() {
     return (float)rand() / RAND_MAX;
 }
+
 int es_delimitador(char *palabra) {
     // Delimitadores exactos
     const char *delims[] = {
@@ -150,9 +185,7 @@ float*n_ks(float**mtx_2){
             n_k[i] += mtx_2[i][j];
         }
     }
-
     return n_k;
-
 }
 
 float** parametro_sigma(float **mtx_2){
@@ -223,33 +256,8 @@ float** parametro_gama(float **mtx_1){
     return gama;
 }
 
-float *vector_intervalos(char *palabra_buscar, FILE *san, int posDocumento, FILE *dic, float **mtx_1, float **mtx_2){
+float *vector_intervalos(int posDic, int posDocumento, float **mtx_1, float **mtx_2,float * n_m,float* n_k  ){
     float* v = (float*)malloc(temas * sizeof(float));
-    
-    // Buscamos la palabra del documento en el diccionario 
-    rewind(dic);  // Reiniciar el puntero del archivo al inicio
-    int posDic = 0;
-    char palabraDic[100];
-    int encontrada = 0;
-    
-    while (fscanf(dic, "%s", palabraDic) != EOF){
-        if(strcmp(palabraDic, palabra_buscar) == 0){
-            encontrada = 1;
-            break;
-        }
-        posDic++;
-    }
-    
-    // Si no se encuentra la palabra, retornar vector vacío
-    if (!encontrada) {
-        for(int i = 0; i < temas; i++) {
-            v[i] = 0.0;
-        }
-        return v;
-    }
-    
-    float * n_m = n_ms(mtx_1);
-    float * n_k = n_ks(mtx_2);
     
     for(int i = 0; i < temas; i++){
         // Calculamos el primer cociente 
@@ -273,8 +281,6 @@ float *vector_intervalos(char *palabra_buscar, FILE *san, int posDocumento, FILE
         v[i] = primerCociente * segundoCociente;
     }
     
-    free(n_m);
-    free(n_k);
     
     return v;
 }
@@ -293,15 +299,15 @@ float** matriz_final(float **mtx_1, float **mtx_2, int n_iteraciones, char *docs
     
     // 1. Abrir archivos UNA SOLA VEZ antes del ciclo
     FILE *d = fopen(docs, "r");
-    FILE *san = fopen("topicos.txt", "r");
-    FILE *dic = fopen("dic.txt", "r");
+    Diccionario *dic = cargar_diccionario("dic.txt");
 
-    if(d == NULL || san == NULL || dic == NULL){
+    float * n_m = n_ms(mtx_1);
+    float * n_k = n_ks(mtx_2);
+
+    if(d == NULL){
         printf("Error al abrir archivos en matriz_final_iterativa\n");
         // Cerrar solo los archivos que se hayan abierto con éxito
         if(d) fclose(d);
-        if(san) fclose(san);
-        if(dic) fclose(dic);
         return NULL;
     }
     
@@ -310,48 +316,41 @@ float** matriz_final(float **mtx_1, float **mtx_2, int n_iteraciones, char *docs
     // INICIO DEL CICLO: Itera 'n_iteraciones' veces
     for (int iter = 0; iter < n_iteraciones; iter++) {
         
-        // --- GESTIÓN DE MEMORIA (dentro del ciclo) ---
-        // 2. Liberar la matriz anterior antes de crear una nueva
         if (mtx_f_resultado != NULL) {
             free_matriz(mtx_f_resultado, documentos);
         }
 
-        // 3. Asignar memoria para la matriz de la iteración actual
         mtx_f_resultado = (float**)malloc(documentos * sizeof(float*));
         if (mtx_f_resultado == NULL) {
              // Manejo de error de malloc
              printf("Error de memoria en la iteración %d\n", iter);
              // Cerrar archivos y salir
-             fclose(d); fclose(san); fclose(dic);
+             fclose(d);
              return NULL;
         }
         
         for(int i = 0; i < documentos; i++) {
             mtx_f_resultado[i] = (float*)calloc(temas, sizeof(float)); 
             if (mtx_f_resultado[i] == NULL) {
-                 // Manejo de error, liberar lo ya asignado
+                 
                  printf("Error de memoria en la iteración %d\n", iter);
-                 free_matriz(mtx_f_resultado, i); // Liberar filas anteriores
-                 // Cerrar archivos y salir
-                 fclose(d); fclose(san); fclose(dic);
+                 free_matriz(mtx_f_resultado, i); 
+                 fclose(d);
                  return NULL;
             }
         }
-        
-        // 4. Resetear el puntero del archivo 'docs' al inicio para la nueva lectura
-        //    (Solo si se lee el mismo archivo 'docs' en cada iteración)
         rewind(d); 
 
-        // --- LÓGICA DE PROCESAMIENTO ---
         char palabra[100];
-        int l = 0; // l es el índice de documento, asumo que se cuenta en cada lectura
+        int l = 0; 
 
         while (fscanf(d, "%s", palabra) != EOF) {
             if (es_delimitador(palabra)){
                 l++;
             } else {
                 if(l > 0 && l <= documentos) {
-                    float *v = vector_intervalos(palabra, san, l-1, dic, mtx_1, mtx_2);
+                    int posicion = buscar_palabra_optimizada(dic,palabra);
+                    float *v = vector_intervalos(posicion, l-1, mtx_1, mtx_2,n_m,n_k);
                     
                     // Normalizar el vector v para crear probabilidades
                     float suma = 0.0;
@@ -386,9 +385,12 @@ float** matriz_final(float **mtx_1, float **mtx_2, int n_iteraciones, char *docs
     } // FIN DEL CICLO
     
     // 5. Cerrar archivos UNA SOLA VEZ al final
+    for(int i = 0; i < dic->num_palabras; i++) {
+    free(dic->palabras[i]);
+    }
+    free(dic->palabras);
+    free(dic);
     fclose(d);
-    fclose(san);
-    fclose(dic);
 
     return mtx_f_resultado;
 }
