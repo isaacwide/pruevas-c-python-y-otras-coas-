@@ -279,79 +279,118 @@ float *vector_intervalos(char *palabra_buscar, FILE *san, int posDocumento, FILE
     return v;
 }
 
-float** matriz_final(float **mtx_1, float **mtx_2, int n, char *docs){
+void free_matriz(float **mtx, int filas) {
+    if (mtx == NULL) return;
+    for(int i = 0; i < filas; i++) {
+        if (mtx[i] != NULL) {
+            free(mtx[i]);
+        }
+    }
+    free(mtx);
+}
+
+float** matriz_final(float **mtx_1, float **mtx_2, int n_iteraciones, char *docs){
+    
+    // 1. Abrir archivos UNA SOLA VEZ antes del ciclo
     FILE *d = fopen(docs, "r");
     FILE *san = fopen("topicos.txt", "r");
     FILE *dic = fopen("dic.txt", "r");
 
     if(d == NULL || san == NULL || dic == NULL){
-        printf("Error al abrir archivos en matriz_final\n");
+        printf("Error al abrir archivos en matriz_final_iterativa\n");
+        // Cerrar solo los archivos que se hayan abierto con éxito
         if(d) fclose(d);
         if(san) fclose(san);
         if(dic) fclose(dic);
         return NULL;
     }
     
-    float **mtx_f = (float**)malloc(documentos * sizeof(float*));
-    for(int i = 0; i < documentos; i++) {
-        mtx_f[i] = (float*)calloc(temas, sizeof(float)); 
-    }
-
-    char palabra[100];
-    int l = 0;
+    float **mtx_f_resultado = NULL;
     
-    while (fscanf(d, "%s", palabra) != EOF) {
-        if (es_delimitador(palabra)){
-            l++;
-        } else {
-            if(l > 0 && l <= documentos) {
-                float *v = vector_intervalos(palabra, san, l-1, dic, mtx_1, mtx_2);
-                
-                // Normalizar el vector v para crear probabilidades
-                float suma = 0.0;
-                for(int j = 0; j < temas; j++){
-                    suma += v[j];
-                }
-                
-                if (suma > 0) {
-                    // Crear rangos de probabilidad acumulada
-                    float *rangos = (float*)malloc((temas + 1) * sizeof(float));
-                    rangos[0] = 0.0;
-                    for(int j = 0; j < temas; j++){
-                        rangos[j+1] = rangos[j] + (v[j] / suma);
-                    }
-                    
-                    // Asignar tópico basado en probabilidad
-                    float probabilidad = numeros_aleatorios();
-                    for(int j = 0; j < temas; j++){
-                        if (probabilidad >= rangos[j] && probabilidad < rangos[j+1]){
-                            mtx_f[l-1][j]++;
-                            break;
-                        }
-                    }
-                    free(rangos);
-                }
-                free(v);
+    // INICIO DEL CICLO: Itera 'n_iteraciones' veces
+    for (int iter = 0; iter < n_iteraciones; iter++) {
+        
+        // --- GESTIÓN DE MEMORIA (dentro del ciclo) ---
+        // 2. Liberar la matriz anterior antes de crear una nueva
+        if (mtx_f_resultado != NULL) {
+            free_matriz(mtx_f_resultado, documentos);
+        }
+
+        // 3. Asignar memoria para la matriz de la iteración actual
+        mtx_f_resultado = (float**)malloc(documentos * sizeof(float*));
+        if (mtx_f_resultado == NULL) {
+             // Manejo de error de malloc
+             printf("Error de memoria en la iteración %d\n", iter);
+             // Cerrar archivos y salir
+             fclose(d); fclose(san); fclose(dic);
+             return NULL;
+        }
+        
+        for(int i = 0; i < documentos; i++) {
+            mtx_f_resultado[i] = (float*)calloc(temas, sizeof(float)); 
+            if (mtx_f_resultado[i] == NULL) {
+                 // Manejo de error, liberar lo ya asignado
+                 printf("Error de memoria en la iteración %d\n", iter);
+                 free_matriz(mtx_f_resultado, i); // Liberar filas anteriores
+                 // Cerrar archivos y salir
+                 fclose(d); fclose(san); fclose(dic);
+                 return NULL;
             }
         }
-    }
+        
+        // 4. Resetear el puntero del archivo 'docs' al inicio para la nueva lectura
+        //    (Solo si se lee el mismo archivo 'docs' en cada iteración)
+        rewind(d); 
 
+        // --- LÓGICA DE PROCESAMIENTO ---
+        char palabra[100];
+        int l = 0; // l es el índice de documento, asumo que se cuenta en cada lectura
+
+        while (fscanf(d, "%s", palabra) != EOF) {
+            if (es_delimitador(palabra)){
+                l++;
+            } else {
+                if(l > 0 && l <= documentos) {
+                    float *v = vector_intervalos(palabra, san, l-1, dic, mtx_1, mtx_2);
+                    
+                    // Normalizar el vector v para crear probabilidades
+                    float suma = 0.0;
+                    for(int j = 0; j < temas; j++){
+                        suma += v[j];
+                    }
+                    
+                    if (suma > 0) {
+                        // Crear rangos de probabilidad acumulada
+                        float *rangos = (float*)malloc((temas + 1) * sizeof(float));
+                        rangos[0] = 0.0;
+                        for(int j = 0; j < temas; j++){
+                            rangos[j+1] = rangos[j] + (v[j] / suma);
+                        }
+                        
+                        // Asignar tópico basado en probabilidad
+                        float probabilidad = numeros_aleatorios();
+                        for(int j = 0; j < temas; j++){
+                            if (probabilidad >= rangos[j] && probabilidad < rangos[j+1]){
+                                mtx_f_resultado[l-1][j]++;
+                                break;
+                            }
+                        }
+                        free(rangos);
+                    }
+                    free(v);
+                }
+            }
+        } // Fin del while
+        
+        printf("Iteración completada: %d/%d\n", iter + 1, n_iteraciones);
+    } // FIN DEL CICLO
+    
+    // 5. Cerrar archivos UNA SOLA VEZ al final
     fclose(d);
     fclose(san);
     fclose(dic);
 
-    if (n > 0){
-        // Liberar mtx_f actual antes de la siguiente iteración
-        for(int i = 0; i < documentos; i++) {
-            free(mtx_f[i]);
-        }
-        free(mtx_f);
-        printf("iteracion %d \n",n);
-        return matriz_final(mtx_1, mtx_2, n-1, docs);
-        
-    } else {
-        return mtx_f;
-    }
+    return mtx_f_resultado;
 }
 
 
@@ -375,7 +414,7 @@ int main() {
     float **gama = parametro_gama(mtx1);
 
     printf("Calculando la ultima matriz...\n");
-    int n = 100;
+    int n = 1000;
     float **mtx_final = matriz_final(mtx1, mtx2, n, filename1);
     
     if (sigma == NULL || gama == NULL) {
